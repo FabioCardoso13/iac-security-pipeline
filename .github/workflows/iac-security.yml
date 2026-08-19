@@ -1,0 +1,19 @@
+name: IaC Security Pipeline
+
+on:
+  push:
+    branches: [ "main", "master" ]
+
+jobs:
+  checkov-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+        
+      - name: Scan Terraform com Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: .
+          framework: terraform
+          soft_fail: false # Garante que o pipeline falha (Quality Gate)
