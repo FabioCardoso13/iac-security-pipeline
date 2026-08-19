@@ -21,9 +21,11 @@ The pipeline is triggered automatically on every repository push. The workflow f
 
 ## Attack Surface & Automated Remediation
 
-The initial infrastructure was deliberately configured with common high-risk vulnerabilities. The pipeline successfully blocked the deployment until the following remediations were applied:
+The initial infrastructure was deliberately configured with common high-risk vulnerabilities. As a result, the pipeline failed the Checkov security gate and blocked the deployment, as shown below.
 
-![Successful Pipeline](./img/failed-pipeline.png)
+![Failed Pipeline](./img/failed-pipeline.png)
+
+The following security remediations were then implemented to address the identified issues:
 
 ### 1. S3 Bucket Security
 * **Vulnerability:** An S3 bucket was created with public access enabled and no encryption, exposing sensitive data to the internet.
