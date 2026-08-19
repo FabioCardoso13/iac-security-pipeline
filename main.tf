@@ -10,10 +10,10 @@ provider "aws" {
 # 1. BUCKET S3 & ENCRIPTAÇÃO
 # Criação da Chave KMS para encriptar os dados
 resource "aws_kms_key" "chave_rh" {
+  # checkov:skip=CKV2_AWS_64: A politica IAM da chave KMS nao e definida aqui devido a limitacoes de Account ID no LocalStack (mock environment).
   description             = "Chave KMS para encriptacao do bucket de dados sensiveis"
   enable_key_rotation     = true
 }
-
 resource "aws_s3_bucket" "dados_sensiveis" {
   # checkov:skip=CKV_AWS_144: Cross-region replication nao e necessaria para este ambiente.
   # checkov:skip=CKV2_AWS_62: Event notifications serao geridas via EventBridge a nivel de conta.
